@@ -179,19 +179,7 @@ export const YOOPTA_PLUGINS = [
       },
     },
   }),
-  Callout.extend({
-    elementProps: {
-      callout: (props: CalloutElement['props']) => ({
-        ...props,
-        theme: 'info',
-      }),
-    },
-    options: {
-      HTMLAttributes: {
-        className: 'callout-element-extended',
-      },
-    },
-  }),
+  Callout,
   Lists.BulletedList.extend({
     options: {
       HTMLAttributes: {

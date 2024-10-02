@@ -8,14 +8,24 @@ const CalloutRender = ({ extendRender, ...props }: PluginElementRenderProps) => 
   const block = useBlockData(blockId);
   const editor = useYooptaEditor();
   const isReadOnly = useYooptaReadOnly();
-  const { theme = 'default' } = element.props || {};
+  const { bgColor = '#F5F7F9', textColor = '#000000', borderColor = '' } = element.props || {};
 
   if (extendRender) {
     return extendRender(props);
   }
 
   return (
-    <div className={`yoopta-callout yoopta-callout-theme-${theme} ${className}`} {...htmlAttrs} {...attributes}>
+    <div
+      className={`yoopta-callout ${className}`}
+      {...htmlAttrs}
+      {...attributes}
+      style={{
+        ...htmlAttrs.style,
+        backgroundColor: bgColor,
+        color: textColor,
+        borderLeft: borderColor ? `4px solid ${borderColor}` : '',
+      }}
+    >
       {!isReadOnly && <CalloutBlockOptions block={block} editor={editor} props={element.props} />}
       {children}
     </div>
