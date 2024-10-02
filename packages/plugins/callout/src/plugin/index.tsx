@@ -18,7 +18,7 @@ const Callout = new YooptaPlugin<CalloutElementMap>({
       render: CalloutRender,
       props: {
         bgColor: '#F7F5F9',
-        textColor: '#000',
+        textColor: '#000000',
         borderColor: '',
       },
     },
@@ -56,11 +56,11 @@ const Callout = new YooptaPlugin<CalloutElementMap>({
       },
       serialize: (element, text, blockMeta) => {
         const bgColor = element.props.bgColor || '#F7F5F9';
-        const textColor = element.props.textColor || '#000';
+        const textColor = element.props.textColor || '#000000';
         const borderColor = element.props.borderColor || '';
         const { align = 'left', depth = 0 } = blockMeta || {};
 
-        return `<dl data-bg-color="${bgColor}" data-text-color=${textColor} data-border-color=${borderColor} data-meta-align="${align}" data-meta-depth="${depth}" style="margin-left: ${depth}px; text-align: ${align}; padding: .5rem .5rem .5rem 1rem; margin-top: .5rem; border-radius: .375rem; color: ${textColor}; ${
+        return `<dl data-bg-color="${bgColor}" data-text-color="${textColor}" data-border-color="${borderColor}" data-meta-align="${align}" data-meta-depth="${depth}" style="margin-left: ${depth}px; text-align: ${align}; padding: .5rem .5rem .5rem 1rem; margin-top: .5rem; border-radius: .375rem; color: ${textColor}; ${
           borderColor ? `border-left: 4px solid ${borderColor}; ` : ''
         }background-color: ${bgColor}">${serializeTextNodes(element.children)}</dl>`;
       },

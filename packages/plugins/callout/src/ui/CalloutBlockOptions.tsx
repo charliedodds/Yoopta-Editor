@@ -10,27 +10,27 @@ type Props = {
   props?: CalloutElementProps;
 };
 
-const CalloutBlockOptions = ({ editor, block, props }: Props) => {
-  const currentTextColor = props?.textColor || '#000';
-  const currentBgColor = props?.bgColor || '#F5F7F9';
-  const currentBorderColor = props?.borderColor || '';
+const CalloutBlockOptions = ({ editor, block, props: calloutProps }: Props) => {
+  const currentTextColor = calloutProps?.textColor || '#000000';
+  const currentBgColor = calloutProps?.bgColor || '#F5F7F9';
+  const currentBorderColor = calloutProps?.borderColor || '';
 
   const updateTextColor = (e: ChangeEvent<HTMLInputElement>) => {
     Elements.updateElement<CalloutPluginElementKeys, CalloutElementProps>(editor, block.id, {
       type: 'callout',
-      props: { textColor: e.target.value, borderColor: currentBorderColor, bgColor: currentBgColor },
+      props: { textColor: e.target.value },
     });
   };
   const updateBgColor = (e: ChangeEvent<HTMLInputElement>) => {
     Elements.updateElement<CalloutPluginElementKeys, CalloutElementProps>(editor, block.id, {
       type: 'callout',
-      props: { bgColor: e.target.value, borderColor: currentBorderColor, textColor: currentTextColor },
+      props: { bgColor: e.target.value },
     });
   };
   const updateBorderColor = (e: ChangeEvent<HTMLInputElement>) => {
     Elements.updateElement<CalloutPluginElementKeys, CalloutElementProps>(editor, block.id, {
       type: 'callout',
-      props: { borderColor: e.target.value, textColor: currentTextColor, bgColor: currentBgColor },
+      props: { borderColor: e.target.value },
     });
   };
 
@@ -39,42 +39,48 @@ const CalloutBlockOptions = ({ editor, block, props }: Props) => {
       <BlockOptionsSeparator />
       <BlockOptionsMenuGroup>
         <BlockOptionsMenuItem>
-          <div className="yoopta-block-options-button w-full justify-between items-center gap-4">
-            <label htmlFor="textColor">Update text colour</label>
-            <input
-              className="ml-auto"
-              type="color"
-              name="textColor"
-              id="textColor"
-              onChange={updateTextColor}
-              value={currentTextColor}
-            />
+          <div className="yoopta-block-options-button">
+            <div className="yoo-callout-flex">
+              <input
+                className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
+                type="color"
+                name="textColor"
+                id="textColor"
+                onChange={updateTextColor}
+                value={currentTextColor}
+              />
+              <label htmlFor="textColor">Update text colour</label>
+            </div>
           </div>
         </BlockOptionsMenuItem>
         <BlockOptionsMenuItem>
-          <div className="yoopta-block-options-button w-full justify-between items-center gap-4">
-            <label htmlFor="bgColor">Update background colour</label>
-            <input
-              className="ml-auto"
-              type="color"
-              name="bgColor"
-              id="bgColor"
-              onChange={updateBgColor}
-              value={currentBgColor}
-            />
+          <div className="yoopta-block-options-button">
+            <div className="yoo-callout-flex">
+              <input
+                className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
+                type="color"
+                name="bgColor"
+                id="bgColor"
+                onChange={updateBgColor}
+                value={currentBgColor}
+              />
+              <label htmlFor="bgColor">Update background colour</label>
+            </div>
           </div>
         </BlockOptionsMenuItem>
         <BlockOptionsMenuItem>
-          <div className="yoopta-block-options-button w-full justify-between items-center gap-4">
-            <label htmlFor="borderColor">Update border colour</label>
-            <input
-              className="ml-auto"
-              type="color"
-              name="borderColor"
-              id="borderColor"
-              onChange={updateBorderColor}
-              value={currentBorderColor}
-            />
+          <div className="yoopta-block-options-button">
+            <div className="yoo-callout-flex">
+              <input
+                className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
+                type="color"
+                name="borderColor"
+                id="borderColor"
+                onChange={updateBorderColor}
+                value={currentBorderColor}
+              />
+              <label htmlFor="borderColor">Update border colour</label>
+            </div>
           </div>
         </BlockOptionsMenuItem>
       </BlockOptionsMenuGroup>
