@@ -10,13 +10,6 @@ const CalloutRender = ({ extendRender, ...props }: PluginElementRenderProps) => 
   const isReadOnly = useYooptaReadOnly();
   const { theme, bgColor, textColor, borderColor } = element.props || {};
 
-
-
-  console.log(props)
-
-
-
-
   if (extendRender) {
     return extendRender(props);
   }
@@ -28,9 +21,9 @@ const CalloutRender = ({ extendRender, ...props }: PluginElementRenderProps) => 
       {...attributes}
       style={{
         ...htmlAttrs.style,
-        backgroundColor: bgColor,
-        color: textColor,
-        borderLeft: borderColor ? `4px solid ${borderColor}` : '',
+        backgroundColor: theme ? undefined : bgColor,
+        color: theme ? undefined : textColor,
+        borderLeft: theme ? undefined : borderColor ? `4px solid ${borderColor}` : '',
       }}
     >
       {!isReadOnly && <CalloutBlockOptions block={block} editor={editor} props={element.props} />}

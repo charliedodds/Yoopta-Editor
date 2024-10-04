@@ -46,9 +46,6 @@ const CalloutBlockOptions = ({ editor, block, props: calloutProps }: Props) => {
       type: 'callout',
       props: {
         theme,
-        bgColor: undefined,
-        borderColor: undefined,
-        textColor: undefined,
       },
     });
   };
@@ -170,24 +167,25 @@ const CalloutBlockOptions = ({ editor, block, props: calloutProps }: Props) => {
             )}
           </button>
         </BlockOptionsMenuItem>
+        <BlockOptionsSeparator />
         <BlockOptionsMenuItem>
           <div className="yoopta-block-options-button">
-            <div className="yoo-callout-flex">
-              <input
-                className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
-                type="color"
-                name="textColor"
-                id="textColor"
-                onChange={updateTextColor}
-                value={currentTextColor}
-              />
-              <label htmlFor="textColor">Update text colour</label>
-            </div>
+              <label className='yoo-callout-flex yoo-callout-cursor-pointer yoo-callout-w-full'>
+                <input
+                  className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
+                  type="color"
+                  name="textColor"
+                  id="textColor"
+                  onChange={updateTextColor}
+                  value={currentTextColor}
+                />
+                Update text color
+              </label>
           </div>
         </BlockOptionsMenuItem>
         <BlockOptionsMenuItem>
           <div className="yoopta-block-options-button">
-            <div className="yoo-callout-flex">
+            <label className="yoo-callout-flex yoo-callout-cursor-pointer yoo-callout-w-full">
               <input
                 className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
                 type="color"
@@ -196,13 +194,13 @@ const CalloutBlockOptions = ({ editor, block, props: calloutProps }: Props) => {
                 onChange={updateBgColor}
                 value={currentBgColor}
               />
-              <label htmlFor="bgColor">Update background colour</label>
-            </div>
+              Update background color
+            </label>
           </div>
         </BlockOptionsMenuItem>
         <BlockOptionsMenuItem>
           <div className="yoopta-block-options-button">
-            <div className="yoo-callout-flex">
+            <label className="yoo-callout-flex yoo-callout-w-full">
               <input
                 className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
                 type="color"
@@ -211,8 +209,8 @@ const CalloutBlockOptions = ({ editor, block, props: calloutProps }: Props) => {
                 onChange={updateBorderColor}
                 value={currentBorderColor}
               />
-              <label htmlFor="borderColor">Update border colour</label>
-            </div>
+              Update border color
+            </label>
           </div>
         </BlockOptionsMenuItem>
       </BlockOptionsMenuGroup>

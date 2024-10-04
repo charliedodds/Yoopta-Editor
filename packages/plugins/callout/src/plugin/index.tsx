@@ -17,7 +17,7 @@ const Callout = new YooptaPlugin<CalloutElementMap>({
     callout: {
       render: CalloutRender,
       props: {
-        theme: 'success',
+        theme: 'default',
         bgColor: '',
         textColor: '',
         borderColor: '',
@@ -69,9 +69,9 @@ const Callout = new YooptaPlugin<CalloutElementMap>({
         } ${
           borderColor ? `data-border-color="${borderColor}"` : ''
         } data-meta-align="${align}" data-meta-depth="${depth}" style="margin-left: ${depth}px; text-align: ${align}; padding: .5rem .5rem .5rem 1rem; margin-top: .5rem; border-radius: .375rem; ${
-          textColor || theme ? `color: ${textColor || CALLOUT_THEME_STYLES[theme].color};` : ''
-        } ${borderColor || theme ? `border-left: 4px solid ${borderColor || CALLOUT_THEME_STYLES[theme].color}; ` : ''}${
-          bgColor || theme ? `background-color: ${bgColor || CALLOUT_THEME_STYLES[theme].backgroundColor}"` : ''
+          theme || textColor ? `color: ${CALLOUT_THEME_STYLES[theme].color || textColor};` : ''
+        } ${theme || borderColor ? `border-left: 4px solid ${CALLOUT_THEME_STYLES[theme].color || borderColor}; ` : ''}${
+          theme || bgColor ? `background-color: ${CALLOUT_THEME_STYLES[theme].backgroundColor || bgColor}"` : ''
         }>${serializeTextNodes(element.children)}</dl>`;
       },
     },
