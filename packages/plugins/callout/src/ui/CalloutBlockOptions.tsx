@@ -1,12 +1,12 @@
+import { ChangeEvent } from 'react';
 import { Elements, UI, YooEditor, YooptaBlockData } from '@yoopta/editor';
-import { CalloutElementProps, CalloutPluginElementKeys, CalloutTheme } from '../types';
 import SuccessIcon from '../icons/success.svg';
 import WarningIcon from '../icons/warning.svg';
 import ErrorIcon from '../icons/error.svg';
 import DefaultIcon from '../icons/default.svg';
 import InfoIcon from '../icons/info.svg';
 import CheckmarkIcon from '../icons/checkmark.svg';
-import { ChangeEvent } from 'react';
+import { CalloutElementProps, CalloutPluginElementKeys, CalloutTheme } from '../types';
 import { CALLOUT_THEME_STYLES } from '../utils';
 
 const { ExtendedBlockActions, BlockOptionsMenuGroup, BlockOptionsMenuItem, BlockOptionsSeparator } = UI;
@@ -56,7 +56,7 @@ const CalloutBlockOptions = ({ editor, block, props: calloutProps }: Props) => {
     <ExtendedBlockActions onClick={() => editor.setSelection([block.meta.order])} className="yoopta-callout-options">
       <BlockOptionsSeparator />
       <BlockOptionsMenuGroup>
-      <BlockOptionsMenuItem>
+        <BlockOptionsMenuItem>
           <button
             type="button"
             className="yoopta-block-options-button yoo-callout-justify-between"
@@ -170,17 +170,17 @@ const CalloutBlockOptions = ({ editor, block, props: calloutProps }: Props) => {
         <BlockOptionsSeparator />
         <BlockOptionsMenuItem>
           <div className="yoopta-block-options-button">
-              <label className='yoo-callout-flex yoo-callout-cursor-pointer yoo-callout-w-full'>
-                <input
-                  className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
-                  type="color"
-                  name="textColor"
-                  id="textColor"
-                  onChange={updateTextColor}
-                  value={currentTextColor}
-                />
-                Update text color
-              </label>
+            <label className="yoo-callout-flex yoo-callout-cursor-pointer yoo-callout-w-full">
+              <input
+                className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
+                type="color"
+                name="textColor"
+                id="textColor"
+                onChange={updateTextColor}
+                value={currentTextColor}
+              />
+              Update text color
+            </label>
           </div>
         </BlockOptionsMenuItem>
         <BlockOptionsMenuItem>
