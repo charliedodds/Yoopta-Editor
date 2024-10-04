@@ -17,8 +17,9 @@ const Callout = new YooptaPlugin<CalloutElementMap>({
     callout: {
       render: CalloutRender,
       props: {
-        bgColor: '#F7F5F9',
-        textColor: '#000000',
+        theme: 'success',
+        bgColor: '',
+        textColor: '',
         borderColor: '',
       },
     },
@@ -37,15 +38,17 @@ const Callout = new YooptaPlugin<CalloutElementMap>({
         nodeNames: ['DL'],
         parse(el, editor) {
           if (el.nodeName === 'DL' || el.nodeName === 'DIV') {
-            const bgColor = el.getAttribute('data-bg-color') as string;
-            const textColor = el.getAttribute('data-text-color') as string;
-            const borderColor = el.getAttribute('data-border-color') as string;
+            const theme = el.getAttribute('data-theme') as CalloutTheme;
+            const bgColor = el.getAttribute('data-bg-color');
+            const textColor = el.getAttribute('data-text-color');
+            const borderColor = el.getAttribute('data-border-color');
 
             return {
               id: generateId(),
               type: 'callout',
               children: deserializeTextNodes(editor, el.childNodes),
               props: {
+                theme,
                 bgColor,
                 textColor,
                 borderColor,
@@ -55,14 +58,21 @@ const Callout = new YooptaPlugin<CalloutElementMap>({
         },
       },
       serialize: (element, text, blockMeta) => {
-        const bgColor = element.props.bgColor || '#F7F5F9';
-        const textColor = element.props.textColor || '#000000';
-        const borderColor = element.props.borderColor || '';
+        const theme = element.props.theme;
+        const bgColor = element.props.bgColor;
+        const textColor = element.props.textColor;
+        const borderColor = element.props.borderColor;
         const { align = 'left', depth = 0 } = blockMeta || {};
 
-        return `<dl data-bg-color="${bgColor}" data-text-color="${textColor}" data-border-color="${borderColor}" data-meta-align="${align}" data-meta-depth="${depth}" style="margin-left: ${depth}px; text-align: ${align}; padding: .5rem .5rem .5rem 1rem; margin-top: .5rem; border-radius: .375rem; color: ${textColor}; ${
-          borderColor ? `border-left: 4px solid ${borderColor}; ` : ''
-        }background-color: ${bgColor}">${serializeTextNodes(element.children)}</dl>`;
+        return `<dl ${theme ? `data-theme="${theme}"` : ''} ${bgColor ? `data-bg-color="${bgColor}"` : ''} ${
+          textColor ? `data-text-color="${textColor}"` : ''
+        } ${
+          borderColor ? `data-border-color="${borderColor}"` : ''
+        } data-meta-align="${align}" data-meta-depth="${depth}" style="margin-left: ${depth}px; text-align: ${align}; padding: .5rem .5rem .5rem 1rem; margin-top: .5rem; border-radius: .375rem; ${
+          textColor || theme ? `color: ${textColor || CALLOUT_THEME_STYLES[theme].color};` : ''
+        } ${borderColor || theme ? `border-left: 4px solid ${borderColor || CALLOUT_THEME_STYLES[theme].color}; ` : ''}${
+          bgColor || theme ? `background-color: ${bgColor || CALLOUT_THEME_STYLES[theme].backgroundColor}"` : ''
+        }>${serializeTextNodes(element.children)}</dl>`;
       },
     },
     markdown: {
