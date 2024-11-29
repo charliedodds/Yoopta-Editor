@@ -34,5 +34,9 @@
   "bugs": {
     "url": "https://github.com/Darginec05/Editor-Yoopta/issues"
   },
-  "gitHead": "12d8460dfe0ead89ee1d6f3f2f1fc68239e93d4c"
+  "gitHead": "12d8460dfe0ead89ee1d6f3f2f1fc68239e93d4c",
+  "dependencies": {
+    "@radix-ui/react-popover": "^1.1.2",
+    "react-colorful": "^5.6.1"
+  }
 }

@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import { Elements, UI, YooEditor, YooptaBlockData } from '@yoopta/editor';
 import SuccessIcon from '../icons/success.svg';
 import WarningIcon from '../icons/warning.svg';
@@ -8,6 +7,8 @@ import InfoIcon from '../icons/info.svg';
 import CheckmarkIcon from '../icons/checkmark.svg';
 import { CalloutElementProps, CalloutPluginElementKeys, CalloutTheme } from '../types';
 import { CALLOUT_THEME_STYLES } from '../utils';
+import { HexColorInput, HexColorPicker } from 'react-colorful';
+import { Popover, PopoverContent, PopoverTrigger } from './Popover';
 
 const { ExtendedBlockActions, BlockOptionsMenuGroup, BlockOptionsMenuItem, BlockOptionsSeparator } = UI;
 
@@ -22,22 +23,22 @@ const CalloutBlockOptions = ({ editor, block, props: calloutProps }: Props) => {
   const currentBgColor = calloutProps?.bgColor || '#F5F7F9';
   const currentBorderColor = calloutProps?.borderColor || '';
 
-  const updateTextColor = (e: ChangeEvent<HTMLInputElement>) => {
+  const updateTextColor = (color: string) => {
     Elements.updateElement<CalloutPluginElementKeys, CalloutElementProps>(editor, block.id, {
       type: 'callout',
-      props: { textColor: e.target.value, theme: undefined },
+      props: { textColor: color, theme: undefined },
     });
   };
-  const updateBgColor = (e: ChangeEvent<HTMLInputElement>) => {
+  const updateBgColor = (color: string) => {
     Elements.updateElement<CalloutPluginElementKeys, CalloutElementProps>(editor, block.id, {
       type: 'callout',
-      props: { bgColor: e.target.value, theme: undefined },
+      props: { bgColor: color, theme: undefined },
     });
   };
-  const updateBorderColor = (e: ChangeEvent<HTMLInputElement>) => {
+  const updateBorderColor = (color: string) => {
     Elements.updateElement<CalloutPluginElementKeys, CalloutElementProps>(editor, block.id, {
       type: 'callout',
-      props: { borderColor: e.target.value, theme: undefined },
+      props: { borderColor: color, theme: undefined },
     });
   };
 
@@ -167,51 +168,86 @@ const CalloutBlockOptions = ({ editor, block, props: calloutProps }: Props) => {
             )}
           </button>
         </BlockOptionsMenuItem>
+
         <BlockOptionsSeparator />
+
         <BlockOptionsMenuItem>
-          <div className="yoopta-block-options-button">
-            <label className="yoo-callout-flex yoo-callout-cursor-pointer yoo-callout-w-full">
-              <input
-                className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
-                type="color"
-                name="textColor"
-                id="textColor"
-                onChange={updateTextColor}
-                value={currentTextColor}
-              />
-              Update text color
-            </label>
-          </div>
+          <Popover>
+            <PopoverTrigger className="yoopta-block-options-button">
+              <div className="yoo-callout-w-full yoo-callout-flex yoo-callout-gap-2">
+                <div
+                  className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-rounded-full"
+                  style={{ backgroundColor: currentTextColor }}
+                />
+                Update text color
+              </div>
+            </PopoverTrigger>
+            <PopoverContent>
+              <div className="yoo-callout-p-2 yoo-callout-flex yoo-callout-flex-col yoo-callout-gap-2">
+                <HexColorPicker color={currentTextColor} onChange={updateTextColor} />
+                <div className="yoo-callout-flex">
+                  #
+                  <HexColorInput
+                    className="yoo-calloutw-full focus:yoo-callout-outline-none"
+                    color={currentTextColor}
+                    onChange={updateTextColor}
+                  />
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
         </BlockOptionsMenuItem>
         <BlockOptionsMenuItem>
-          <div className="yoopta-block-options-button">
-            <label className="yoo-callout-flex yoo-callout-cursor-pointer yoo-callout-w-full">
-              <input
-                className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
-                type="color"
-                name="bgColor"
-                id="bgColor"
-                onChange={updateBgColor}
-                value={currentBgColor}
-              />
-              Update background color
-            </label>
-          </div>
+          <Popover>
+            <PopoverTrigger className="yoopta-block-options-button">
+              <div className="yoo-callout-w-full yoo-callout-flex yoo-callout-gap-2">
+                <div
+                  className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-rounded-full"
+                  style={{ backgroundColor: currentBgColor }}
+                />
+                Update background color
+              </div>
+            </PopoverTrigger>
+            <PopoverContent>
+              <div className="yoo-callout-p-2 yoo-callout-flex yoo-callout-flex-col yoo-callout-gap-2">
+                <HexColorPicker color={currentBgColor} onChange={updateBgColor} />
+                <div className="yoo-callout-flex">
+                  #
+                  <HexColorInput
+                    className="yoo-calloutw-full focus:yoo-callout-outline-none"
+                    color={currentBgColor}
+                    onChange={updateBgColor}
+                  />
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
         </BlockOptionsMenuItem>
         <BlockOptionsMenuItem>
-          <div className="yoopta-block-options-button">
-            <label className="yoo-callout-flex yoo-callout-w-full">
-              <input
-                className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-mr-2 yoopta-callout-custom-color"
-                type="color"
-                name="borderColor"
-                id="borderColor"
-                onChange={updateBorderColor}
-                value={currentBorderColor}
-              />
-              Update border color
-            </label>
-          </div>
+          <Popover>
+            <PopoverTrigger className="yoopta-block-options-button">
+              <div className="yoo-callout-w-full yoo-callout-flex yoo-callout-gap-2">
+                <div
+                  className="yoo-callout-w-4 yoo-callout-h-4 yoo-callout-rounded-full"
+                  style={{ backgroundColor: currentBorderColor }}
+                />
+                Update border color
+              </div>
+            </PopoverTrigger>
+            <PopoverContent>
+              <div className="yoo-callout-p-2 yoo-callout-flex yoo-callout-flex-col yoo-callout-gap-2">
+                <HexColorPicker color={currentBorderColor} onChange={updateBorderColor} />
+                <div className="yoo-callout-flex">
+                  #
+                  <HexColorInput
+                    className="yoo-calloutw-full focus:yoo-callout-outline-none"
+                    color={currentBorderColor}
+                    onChange={updateBorderColor}
+                  />
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
         </BlockOptionsMenuItem>
       </BlockOptionsMenuGroup>
     </ExtendedBlockActions>
